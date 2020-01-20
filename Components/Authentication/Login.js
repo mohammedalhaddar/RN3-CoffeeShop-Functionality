@@ -7,6 +7,12 @@ import { Text } from "native-base";
 import styles from "./styles";
 
 class Login extends Component {
+
+
+  static navigationOptions = {
+    title: "Login"
+  }
+  
   render() {
     return (
       <View style={styles.authContainer}>
@@ -22,10 +28,10 @@ class Login extends Component {
           placeholderTextColor="#A6AEC1"
           secureTextEntry={true}
         />
-        <TouchableOpacity style={styles.authButton}>
+        <TouchableOpacity style={styles.authButton} onPress={ () => this.props.navigation.push("CoffeeList")}>
           <Text style={styles.authButtonText}>Log in</Text>
         </TouchableOpacity>
-        <Text style={styles.authOther}>Click here to register!</Text>
+        <Text style={styles.authOther} onPress={ () => this.props.navigation.push("Signup")}>Click here to register!</Text>
       </View>
     );
   }

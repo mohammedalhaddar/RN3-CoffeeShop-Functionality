@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NumericInput from "react-native-numeric-input";
+import HeaderBtn from "../HeaderBtn";
 
 // NativeBase Components
 import {
@@ -105,6 +106,11 @@ class CoffeeDetail extends Component {
       </Container>
     );
   }
+}
+
+CoffeeDetail.navigationOptions = {
+  title: "Coffee Detail",
+  headerRight: () => <HeaderBtn text="Cart"></HeaderBtn>
 }
 
 export default CoffeeDetail;
