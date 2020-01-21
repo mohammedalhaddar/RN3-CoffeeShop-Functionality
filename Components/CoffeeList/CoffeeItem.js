@@ -10,10 +10,12 @@ import { ListItem, Card, CardItem, Thumbnail, Text, Left } from "native-base";
 import styles from "./styles";
 
 const CoffeeItem = ({ coffeeshop, key, navigation }) => {
-  const handlePress = () => navigation.push("CoffeeDetail", key)
+  const handlePress = () => navigation.navigate("CoffeeDetail", {
+    key: coffeeshop.id
+  })
 
   return (
-    <ImageBackground source={coffeeshop.background} style={styles.background}>
+    <ImageBackground source={{uri: coffeeshop.background}} style={styles.background}>
       <View style={styles.overlay} />
       <ListItem button onPress={handlePress} style={styles.listitem}>
         <Card style={styles.transparent}>
@@ -21,7 +23,7 @@ const CoffeeItem = ({ coffeeshop, key, navigation }) => {
             <Left>
               <Thumbnail
                 bordered
-                source={coffeeshop.img}
+                source={{ uri: coffeeshop.img}}
                 style={styles.thumbnail}
               />
               <Text style={styles.text}>{coffeeshop.name}</Text>

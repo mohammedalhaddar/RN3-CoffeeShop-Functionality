@@ -22,6 +22,10 @@ import styles from "./styles";
 
 //List
 import coffeeshops from "../CoffeeList/list";
+import coffeeStore from "../../Store/coffeeStore";
+import { withNavigation } from "react-navigation";
+import { Observer, observer } from "mobx-react";
+import cartStore from "../../Store/cartStore";
 
 class CoffeeDetail extends Component {
   state = {
@@ -41,7 +45,11 @@ class CoffeeDetail extends Component {
     });
 
   render() {
-    const coffeeshop = coffeeshops[0];
+    console.log(this.props.navigation.getParam("key"))
+    const id = this.props.navigation.getParam("key");
+    const coffeeshop = coffeeStore.getShopById(id);
+    console.log(coffeeshop);
+
     return (
       <Container>
         <Content>
@@ -55,7 +63,7 @@ class CoffeeDetail extends Component {
               </Left>
               <Body />
               <Right>
-                <Thumbnail bordered source={coffeeshop.img} />
+                <Thumbnail bordered source={{uri: coffeeshop.img}} />
               </Right>
             </CardItem>
             <CardItem>
@@ -96,7 +104,7 @@ class CoffeeDetail extends Component {
               </Body>
 
               <Right>
-                <Button full style={styles.addButton}>
+                <Button full style={styles.addButton} onPress={ () => cartStore.addItemsToCart(this.state)}>
                   <Text>Add</Text>
                 </Button>
               </Right>
@@ -112,5 +120,6 @@ CoffeeDetail.navigationOptions = {
   title: "Coffee Detail",
   headerRight: () => <HeaderBtn text="Cart"></HeaderBtn>
 }
+
 
 export default CoffeeDetail;

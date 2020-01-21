@@ -4,16 +4,21 @@ import React from "react";
 import { List, Content } from "native-base";
 
 // Store
-import coffeeshops from "./list";
+import coffeeStore from "../../Store/coffeeStore";
+
 
 // Component
 import CoffeeItem from "./CoffeeItem";
 import HeaderBtn from "../HeaderBtn";
+import { observer } from "mobx-react";
+import { withNavigation } from "react-navigation";
+
 
 const CoffeeList = ({ navigation }) => {
-  const coffeeshopList = coffeeshops.map(coffeeshop => (
-    <CoffeeItem coffeeshop={coffeeshop} key={coffeeshop.id} />
-  ));
+  const coffeeshopList = coffeeStore.coffeeshops.map(coffeeshop => {
+    return <CoffeeItem  coffeeshop={coffeeshop} key={coffeeshop.id}/>
+  });
+
   return (
     <Content>
       <List>{coffeeshopList}</List>
@@ -27,4 +32,6 @@ CoffeeList.navigationOptions = {
   headerRight: () => <HeaderBtn text="Cart"></HeaderBtn>
 }
 
-export default CoffeeList;
+
+
+export default (observer(withNavigation(CoffeeList)));
